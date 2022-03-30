@@ -1,0 +1,32 @@
+﻿@page
+@model OdeToCode.Pages.Restaurants.ClientRestaurantsModel
+@{
+}
+
+<h2> Client Restaurants</h2>
+<table class="table" id="restaurants">
+</table>
+@section Scripts {
+
+@*<script src="~/lib/datatables/js/jquery.dataTables.js"></script>*@
+<script src="~/node_modules/datatables.net/js/jquery.dataTables.js"></script>
+<script src="~/node_modules/datatables.net-bs5/js/dataTables.bootstrap5.js"></script>
+<script src="~/node_modules/datatables.net-bs5/css/dataTables.bootstrap5.css"></script>
+
+<script>
+    $(function() {
+        $.ajax("/api/restaurants/", { method: "get" })
+        .then(function(response) {
+            $("#restaurants").dataTable({
+            data: response,
+            columns: [
+                {"data": "name"},
+                {"data": "location"},
+                {"data": "cuisine"}
+            ]});
+
+        })
+    });
+
+</script>
+}
